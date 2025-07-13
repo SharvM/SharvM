@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - Nibbles Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Nibbles</h1>
+
+  <h2>📝 Summary</h2>
+  <p>Nibbles is a beginner-friendly Linux machine that focuses on enumeration, exploiting a vulnerable web app, and gaining root through a local privilege escalation exploit.</p>
+
+  <h2>🔍 Enumeration</h2>
+  <pre>nmap -sC -sV -oA nibbles 10.10.10.75</pre>
+  <p>We find an HTTP service on port 80 and a custom web app on <code>/nibbleblog</code>.</p>
+
+  <h2>🔓 Exploitation</h2>
+  <p>We gain access to the admin panel using default credentials:</p>
+  <pre>admin:nibbles</pre>
+  <p>We then upload a PHP reverse shell via the plugin feature and get a reverse shell:</p>
+  <pre>nc -lvnp 4444</pre>
+
+  <h2>📈 Privilege Escalation</h2>
+  <p>Using <code>sudo -l</code> we discover that we can run a script as root:</p>
+  <pre>sudo /home/nibbler/personal/stuff/monitor.sh</pre>
+  <p>We modify the script to get a root shell.</p>
+
+  <h2>🏁 Root Flag</h2>
+  <pre>cat /root/root.txt</pre>
+
+  <h2>🎯 Lessons Learned</h2>
+  <ul>
+    <li>Importance of web app enumeration</li>
+    <li>Using default creds to gain initial access</li>
+    <li>Identifying privilege escalation vectors through <code>sudo</code> permissions</li>
+  </ul>
+
+  <p><a href=\"../index.html\">⬅ Back to Portfolio</a></p>
+</body>
+</html>
