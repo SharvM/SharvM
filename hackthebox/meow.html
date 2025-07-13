@@ -47,19 +47,39 @@
   <p>Can be obtained through a simple Google search.</p>
 
   <h2>Task 2: What tool do we use to interact with the operating system in order to issue commands via the command line, such as the one to start our VPN connection? It's also known as a console or shell.</h2>
-  <p>We gain access to the admin panel using default credentials:</p>
-  <pre>admin:nibbles</pre>
-  <p>We then upload a PHP reverse shell via the plugin feature and get a reverse shell:</p>
-  <pre>nc -lvnp 4444</pre>
+  <pre>terminal</pre>
+  <p>Can be obtained through a simple Google search.</p>
 
-  <h2>📈 Privilege Escalation</h2>
-  <p>Using <code>sudo -l</code> we discover that we can run a script as root:</p>
-  <pre>sudo /home/nibbler/personal/stuff/monitor.sh</pre>
-  <p>We modify the script to get a root shell.</p>
+  <h2>Task 3: What service do we use to form our VPN connection into HTB labs?</h2>
+  <pre>openvpn</pre>
+  <p>Can be obtained through a simple Google search or by looking at "Introduction to Lab Access" on the HTB website.</p>
 
-  <h2>🏁 Root Flag</h2>
-  <pre>cat /root/root.txt</pre>
+  <h2>Task 4: What tool do we use to test our connection to the target with an ICMP echo request?</h2>
+  <pre>ping</pre>
+  <p>Can be obtained through a simple Google search.</p>
 
+  <h2>Task 5: What is the name of the most common tool for finding open ports on a target?</h2>
+  <pre>nmap</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 6: What service do we identify on port 23/tcp during our scans?</h2>
+  <pre>telnet</pre>
+  <p>Nmap {ip address}</p>
+
+  <h2>Task 7: What username is able to log into the target over telnet with a blank password?</h2>
+  <pre>root</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>b40abdfe23665f766f9c61ecba8a4c19</pre>
+  <ol>
+  <li>telnet {ip address}</li>
+  <li>login --> admin:admin (can be left blank)</li>
+  <li>confirmation --> whoami (should return root)</li>
+  <li>ls --> cat flag.txt --> b40abdfe23665f766f9c61ecba8a4c19</li>
+</ol>
+  <!--<p>telnet {ip address}, login  admin:admin (can be left blank), confirmation whoami (should return root), ls  cat(flag.txt)  b40abdfe23665f766f9c61ecba8a4c19</p> -->
+  
   <h2>🎯 Lessons Learned</h2>
   <ul>
     <li>Importance of web app enumeration</li>
