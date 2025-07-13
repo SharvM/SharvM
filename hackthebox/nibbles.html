@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTB - Nibbles Writeup</title>
+  <title>HTB - (Tier 0) Meow Writeup</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,16 +37,16 @@
   </style>
 </head>
 <body>
-  <h1>HackTheBox: Nibbles</h1>
+  <h1>HackTheBox: Meow</h1>
 
   <h2>📝 Summary</h2>
-  <p>Nibbles is a beginner-friendly Linux machine that focuses on enumeration, exploiting a vulnerable web app, and gaining root through a local privilege escalation exploit.</p>
+  <p>Meow is a beginner-friendly Linux machine that focuses on Telnet, Protocols, Reconnaissance, Weak Credentials, and Misconfigurations.</p>
 
-  <h2>🔍 Enumeration</h2>
-  <pre>nmap -sC -sV -oA nibbles 10.10.10.75</pre>
-  <p>We find an HTTP service on port 80 and a custom web app on <code>/nibbleblog</code>.</p>
+  <h2>TASK 1: What does the acronym VM stand for?</h2>
+  <pre>Virtual Machine</pre>
+  <p>Can be obtained through a simple Google search.</p>
 
-  <h2>🔓 Exploitation</h2>
+  <h2>Task 2: What tool do we use to interact with the operating system in order to issue commands via the command line, such as the one to start our VPN connection? It's also known as a console or shell.</h2>
   <p>We gain access to the admin panel using default credentials:</p>
   <pre>admin:nibbles</pre>
   <p>We then upload a PHP reverse shell via the plugin feature and get a reverse shell:</p>
