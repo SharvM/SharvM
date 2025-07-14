@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - (Tier 0) Fawn Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Fawn</h1>
+
+  <h2>📝 Summary</h2>
+  <p>Fawn is a beginner-friendly Linux machine that focuses on File Transfer Protocol (FTP), Protocols, Reconnaissance, and Anonymous/Guest Access.</p>
+
+  <h2>TASK 1: What does the 3-letter acronym FTP stand for?</h2>
+  <pre>File Transfer Protocol</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 2: Which port does the FTP service listen on usually?</h2>
+  <pre>21</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 3: FTP sends data in the clear, without any encryption. What acronym is used for a later protocol designed to provide similar functionality to FTP but securely, as an extension of the SSH protocol?</h2>
+  <pre>SFTP</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 4: What is the command we can use to send an ICMP echo request to test our connection to the target?</h2>
+  <pre>ping {ip address}</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 5: From your scans, what version is FTP running on the target?</h2>
+  <pre>vsftpd 3.0.3</pre>
+  <p>nmap -sV {ip address}</p>
+
+  <h2>Task 6: From your scans, what OS type is running on the target?</h2>
+  <pre>Unix</pre>
+  <p>nmap -sV {ip address}</p>
+
+  <h2>Task 7: What is the command we need to run in order to display the 'ftp' client help menu?</h2>
+  <pre>ftp -?</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 8: What is username that is used over FTP when you want to log in without having an account?</h2>
+  <pre>anonymous</pre>
+  <p>Can be obtained through a simple Google search.</p>  
+  
+  <h2>Task 9: What is the response code we get for the FTP message 'Login successful'?</h2>
+  <pre>230</pre>
+  <ul>
+    <li>ftp {ip address}</li>
+    <li>username: anonymous</li>
+    <li>password: xxxxxxxxx</li>
+  </ul>
+
+  <h2>Task 10: There are a couple of commands we can use to list the files and directories available on the FTP server. One is dir. What is the other that is a common way to list files on a Linux system.</h2>
+  <pre>ls</pre>
+  <p>Can be obtained through a simple Google search or by typing "help" in ftp prompt.</p>
+
+  <h2>Task 11: What is the command used to download the file we found on the FTP server?</h2>
+  <pre>get</pre>
+  <p>Can be obtained through a simple Google search or by typing "help" in ftp prompt.</p>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>035db21c881520061c53e0536e44f815</pre>
+   <ul>
+    <li>ftp > ls </li>
+    <li>get flag.txt</li>
+    <li>bye</li>
+    <li>ls</li>
+    <li>cat flag.txt</li>
+  </ul>
+  <!--<p>telnet {ip address}, login  admin:admin (can be left blank), confirmation whoami (should return root), ls  cat(flag.txt)  b40abdfe23665f766f9c61ecba8a4c19</p> -->
+  
+  <h2>🎯 Lessons Learned</h2>
+<ul>
+  <li>Identified open ports using <code>nmap</code> scan (port 21 - FTP).</li>
+  <li>Learned how to enumerate anonymous FTP access.</li>
+  <li>Discovered readable files on the FTP server without authentication.</li>
+  <li>Downloaded sensitive files (e.g., flag.txt or user credentials) via FTP.</li>
+  <li>Practiced basic file transfer using command-line FTP client.</li>
+  <li>Understood the security risk of misconfigured FTP services.</li>
+  <li>Learned how to use the <code>get</code> command inside FTP prompt.</li>
+  <li>Reinforced importance of securing FTP with authentication and proper permissions.</li>
+  <li>Learned the value of minimal and clean enumeration—don’t overthink easy boxes.</li>
+</ul>
+
+  <p><a href="/SharvM/index.html">⬅ Back to Portfolio</a></p>
