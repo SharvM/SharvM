@@ -53,6 +53,37 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+    .htb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .tier-column h3 {
+      color: #00ffcc;
+      border-bottom: 1px solid #00ffcc;
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-column ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tier-column li {
+      margin-bottom: 0.75rem;
+    }
+
+    .tier-column a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+
+    .tier-column a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -62,14 +93,24 @@
 
   <section id="hackthebox">
     <h2>HackTheBox Solutions</h2>
+    <div class="htb-grid">
+    <div class="tier-column">
+    <h3>Tier 0</h3>
     <ul>
-      <li><a href="hackthebox/meow.html">Meow (Tier 0)</a></li>
-      <li><a href="hackthebox/fawn.html">Fawn (Tier 0)</a></li>
-      <li><a href="hackthebox/dancing.html">Dancing (Tier 0)</a></li>
-      <li><a href="hackthebox/redeemer.html">Redeemer (Tier 0)</a></li>
-      
-      <!-- Add more as you go -->
+      <li><a href="hackthebox/meow.html">Meow</a></li>
+      <li><a href="hackthebox/fawn.html">Fawn</a></li>
+      <li><a href="hackthebox/dancing.html">Dancing</a></li>
+      <li><a href="hackthebox/redeemer.html">Redeemer</a></li>
     </ul>
+    </div>
+    <div class="tier-column">
+    <h3>Tier 1</h3>
+    <ul>
+      <li><a href="hackthebox/appointment.html">Appointment</a></li>
+    </ul>
+    </div>
+  <!-- Add more tiers as needed -->
+</div>
   </section>
 
   <section id="projects">
