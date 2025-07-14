@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - (Tier 0) Dancing Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Dancing</h1>
 
+  <h2>📝 Summary</h2>
+  <p>Dancing is a beginner-friendly Linux machine that focuses on Protocols, Server Message Block (SMB), Reconnaissance, Anonymous/Guest Access.</p>
+
+  <h2>TASK 1: What does the 3-letter acronym SMB stand for?</h2>
+  <pre>Server Message Block</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 2: What port does SMB use to operate at?</h2>
+  <pre>445</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 3: What is the service name for port 445 that came up in our Nmap scan?</h2>
+  <pre>microsoft-ds</pre>
+  <p>nmap -sV {ip address} OR nmap -sV -p 445 {ip address}</p>
+
+  <h2>Task 4: What is the 'flag' or 'switch' that we can use with the smbclient utility to 'list' the available shares on Dancing?</h2>
+  <pre>-L</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>How many shares are there on Dancing?</h2>
+  <pre>4</pre>
+  <ol>
+  <li>smbclient -L {ip address}</li>
+  <li>anonymous authentication (similar to FTP)</li>
+  </ol>
+
+  <h2>Task 6: What is the name of the share we are able to access in the end with a blank password?</h2>
+  <pre>WorkShares</pre>
+  <ol>
+  <li>smbclient \\\\{ip address}\\ADMIN$ = NT_STATUS_ACCESS_DENIED</li>
+  <li>smbclient \\\\{ip address}\\C$ = NT_STATUS_ACCESS_DENIED</li>
+  <li>smbclient \\\\{ip address}\\IPC$ = NT_STATUS_ACCESS_DENIED</li>
+  <li>smbclient \\\\{ip address}\\WorkShares = smb: \> </li>
+  </ol>
+
+  <h2>Task 7: What is the command we can use within the SMB shell to download the files we find?</h2>
+  <pre>get</pre>
+  <p>smb: \> help</p>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>5f61c10dffbc77a704d76016a22f1664</pre>
+  <ol>
+  <li>smb: \> ls </li>
+  <li>smb: \> cd Amy.J</li>
+  <li>smb: \> ls</li>
+  <li>smb: \> cd ..</li>
+  <li>smb: \> cd James.P</li>
+  <li>smb: \> ls</li>
+  <li>smb: \> get flag.txt</li>
+  <li>smb: \> exit</li>
+  <li>cat flag.txt</li>
+  </ol>
+  <!--<p>telnet {ip address}, login  admin:admin (can be left blank), confirmation whoami (should return root), ls  cat(flag.txt)  b40abdfe23665f766f9c61ecba8a4c19</p> -->
+  
+  <h2>🎯 Lessons Learned</h2>
+<ul>
+  <li>Discovered SMB (port 445) service running using <code>nmap</code>.</li>
+  <li>Enumerated SMB shares using <code>smbclient</code> and <code>enum4linux</code>.</li>
+  <li>Accessed open shares without authentication (guest access).</li>
+  <li>Learned how to list available files using <code>smbclient -L</code> and <code>smbclient //IP/share</code>.</li>
+  <li>Practiced downloading files from SMB shares using <code>get</code> command.</li>
+  <li>Found the flag within an accessible share (e.g., <code>WorkShares</code>).</li>
+  <li>Understood risks of unauthenticated SMB share exposure.</li>
+  <li>Reinforced enumeration techniques for SMB services in Windows environments.</li>
+  <li>Learned the importance of checking file permissions on network shares.</li>
+</ul>
+
+  <p><a href="/SharvM/index.html">⬅ Back to Portfolio</a></p>
+</p>
+</body>
+</html>
