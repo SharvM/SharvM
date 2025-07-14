@@ -1,31 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Certifications - Sharv Mahajan</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 2em;
+      background-color: #f9f9f9;
+      color: #222;
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
     }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
     .cert-card {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1em;
-      margin-bottom: 1em;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1.5em;
+      margin-bottom: 1.5em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+
     .cert-title {
       font-size: 1.25em;
       font-weight: bold;
+      color: #0056b3;
     }
+
     .cert-org {
+      font-size: 0.95em;
       color: #555;
+      margin-top: 0.2em;
     }
+
+    .cert-desc {
+      margin: 1em 0;
+      line-height: 1.6;
+    }
+
     .cert-link {
+      text-decoration: none;
+      color: #0073e6;
+      font-weight: bold;
+    }
+
+    .cert-link:hover {
+      text-decoration: underline;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-top: 2em;
       color: #0073e6;
       text-decoration: none;
     }
-    .cert-link:hover {
+
+    a.back-link:hover {
       text-decoration: underline;
     }
   </style>
@@ -37,14 +73,16 @@
   <div class="cert-card">
     <div class="cert-title">Google Cybersecurity Professional Certificate</div>
     <div class="cert-org">Issued by Coursera • Google</div>
-    <p>This certification demonstrates foundational knowledge in cybersecurity, including risk management, network security, incident response, and security tools like SIEM, Wireshark, and Linux commands.</p>
+    <div class="cert-desc">
+      This certification demonstrates foundational skills in cybersecurity, including network security,
+      incident response, threat management, and tools like Wireshark, SIEM, Linux, and SQL.
+    </div>
     <a href="https://coursera.org/share/8652368f46239e959dd97bb84611722c" class="cert-link" target="_blank" rel="noopener noreferrer">
       View Certificate
     </a>
   </div>
 
-  <p><a href="../index.html">⬅ Back to Portfolio</a></p>
+  <a href="../index.html" class="back-link">⬅ Back to Portfolio</a>
 
 </body>
 </html>
-
