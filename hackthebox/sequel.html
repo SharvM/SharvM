@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - (Tier 1) Sequel Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Sequel</h1>
 
+  <h2>📝 Summary</h2>
+  <p>Sequel is a beginner-friendly Linux machine that focuses on Vulnerability Management, Databases, MySQL, SQL, Reconnaissance, and Weak Credentials.</p>
+
+  <h2>TASK 1: During our scan, which port do we find serving MySQL?</h2>
+  <pre>3306</pre>
+  <p>nmap -sV -F {ip address}</p>
+
+  <h2>Task 2: What community-developed MySQL version is the target running?</h2>
+  <pre>MariaDB</pre>
+  <p>nmap -sV -sC -v {ip address}</p>
+
+  <h2>Task 3: When using the MySQL command line client, what switch do we need to use in order to specify a login username?</h2>
+  <pre>-u</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 4: Which username allows us to log into this MariaDB instance without providing a password?</h2>
+  <pre>root</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 5: In SQL, what symbol can we use to specify within the query that we want to display everything inside a table?</h2>
+  <pre>*</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 6: In SQL, what symbol do we need to end each query with?</h2>
+  <pre>;</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 7: There are three databases in this MySQL instance that are common across all MySQL instances. What is the name of the fourth that's unique to this host?</h2>
+  <pre>htb</pre>
+  <ol>
+    <li>mysql -u root -h {ip address}</li>
+    <li>show databases;</li>
+  </ol>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>7b4bec00d1a39e3dd4e021ec3d915da8</pre>
+  <ol>
+    <li>mysql -u root -h {ip address}</li>
+    <li>show databases;</li>
+    <li>use htb;</li>
+    <li>show tables;</li>
+    <li>SELECT * FROM config;</li>
+  </ol>
+  
+  <h2>Sequel - Lessons Learned</h2>
+<ul>
+  <li>Enumerating open ports using <code>nmap</code> helped identify a MySQL database service running on the target machine.</li>
+  <li>Connecting to the MySQL service without a password exposed the database schema and enabled extraction of user credentials.</li>
+  <li>Learned how to extract and crack MySQL password hashes using tools like <code>hashcat</code> or <code>John the Ripper</code>.</li>
+  <li>Pivoted from database access to system shell using known credentials through SSH.</li>
+  <li>Performed privilege escalation by exploiting SUID binaries or weak file permissions.</li>
+  <li>Reinforced the importance of securing database services and removing anonymous or empty-password accounts.</li>
+</ul>
+
+  <p><a href="/SharvM/index.html">⬅ Back to Portfolio</a></p>
