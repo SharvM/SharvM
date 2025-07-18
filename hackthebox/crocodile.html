@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTB - (Tier 1) Crocodile Writeup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>HackTheBox: Crocodile</h1>
 
+  <h2>📝 Summary</h2>
+  <p>Crocodile is a beginner-friendly Linux machine that focuses on Custom Applications, Protocols, Apache, FTP, Reconnaissance, Web Site Structure Discovery, Clear Text Credentials, and Anonymous/Guest Access.</p>
+
+  <h2>TASK 1: What Nmap scanning switch employs the use of default scripts during a scan?</h2>
+  <pre>-sC</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 2: What service version is found to be running on port 21?</h2>
+  <pre>vsftpd 3.0.3</pre>
+  <p>nmap -sC-sV -p 21 {ip address}</p>
+
+  <h2>Task 3: What FTP code is returned to us for the "Anonymous FTP login allowed" message?</h2>
+  <pre>230</pre>
+  <ol>
+    <li>sudo ftp {ip address}</li>
+    <li>username = anonymous</li>
+    <li>password = blank</li>
+  </ol>
+
+  <h2>Task 4: After connecting to the FTP server using the ftp client, what username do we provide when prompted to log in anonymously?</h2>
+  <pre>anonymous</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 5: After connecting to the FTP server anonymously, what command can we use to download the files we find on the FTP server?</h2>
+  <pre>get</pre>
+  <p>Can be obtained through a simple Google search.</p>
+
+  <h2>Task 6: What is one of the higher-privilege sounding usernames in 'allowed.userlist' that we download from the FTP server?</h2>
+  <pre>admin</pre>
+  <ol>
+  <li>ftp> ls</li>
+  <li>ftp> get allowed.userlist</li>
+  <li>ftp> get allowed.userlist.passwd</li>
+  <li>ftp> quit</li>
+  <li>cat allowed.userlist</li>
+  </ol>
+
+  <h2>Task 7: What version of Apache HTTP Server is running on the target host?</h2>
+  <pre>Apache httpd 2.4.41</pre>
+  <p>nmap -sC -p 80 {ip address}</p>
+
+  <h2>Task 8: What switch can we use with Gobuster to specify we are looking for specific filetypes?</h2>
+  <pre>-x</pre>
+  <p>Can be obtained through a simple Google search or by typing "gobuster --help" in CLI.</p>
+
+  <h2>Task 9: Which PHP file can we identify with directory brute force that will provide the opportunity to authenticate to the web service?</h2>
+  <pre>login.php</pre>
+  <ol>
+    <li>gobuster dir -u {http://ip address} -x .php -w "path to wordlists.txt"</li>
+    <li>Navigate to web browser of choice and type the following into search: http://{ip address}/login.php</li>
+    <li>username = admin</li>
+    <li>In CLI, cat allowed.userlist.passwd</li>
+    <li>Obtain the password associated with the username = admin</li>
+    <li>password = obtained password</li>
+  </ol>
+
+  <h2>SUBMIT FLAG: Submit root flag</h2>
+  <pre>c7110277ac44d78b6a9fff2232434d16</pre>
+  <p>After logging in to the webpage, the flag is displayed.</p>
+
+
+  <h2>🎯 Lessons Learned</h2>
+<ul>
+  <li>Learned how to use <code>nmap -sC -sV</code> to identify services running on specific ports and versions.</li>
+  <li>Discovered that anonymous FTP login (code <code>230</code>) can reveal sensitive files—highlighting the risks of misconfigured FTP servers.</li>
+  <li>Understood basic FTP navigation and file download using the <code>get</code> command.</li>
+  <li>Found user lists and password files via anonymous access, reinforcing the importance of restricting sensitive files on public services.</li>
+  <li>Identified a login portal on a web server using directory brute-forcing with Gobuster and the <code>-x</code> switch to search for specific filetypes like <code>.php</code>.</li>
+  <li>Successfully authenticated to the web service using a username/password found on the FTP server—highlighting how exposed credentials can be reused across services.</li>
+  <li>Learned the importance of securing backup files and limiting file exposure on public-facing services.</li>
+</ul>
+
+
+
+  <p><a href="/SharvM/index.html">⬅ Back to Portfolio</a></p>
+</p>
+</body>
+</html>
