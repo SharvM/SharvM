@@ -125,7 +125,51 @@
   .project-card a:hover {
       text-decoration: underline;
     }
+
+  .cert-card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 8px rgba(0, 255, 200, 0.1);
+  }
+
+  .cert-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #6effd4;
+  }
+
+  .cert-org {
+    font-size: 0.95em;
+    color: #aaa;
+    margin-top: 0.2em;
+  }
+
+  .cert-desc {
+    margin: 1em 0;
+    line-height: 1.6;
+    color: #ccc;
+  }
+
+  .cert-skills ol {
+    padding-left: 1.2em;
+    color: #ccc;
+  }
+
+  .cert-link {
+    text-decoration: none;
+    color: #4efcba;
+    font-weight: bold;
+  }
+
+  .cert-link:hover {
+    text-decoration: underline;
+  }
   </style>
+
+
 </head>
 <body>
   <header>
@@ -200,11 +244,50 @@
 
   <section id="certifications">
     <h2>Certifications</h2>
-    <ul>
-      <li><a href="certifications/certifications.html">Certificates</a></li>
-      <!-- Add more as you go -->
-    </ul>
-    </section>
+    <div class="cert-card">
+      <div class="cert-title">Google Cybersecurity Professional Certificate</div>
+      <div class="cert-org">Issued by Coursera • Google</div>
+      <div class="cert-desc">
+        Demonstrates foundational skills in cybersecurity, including network security,
+        incident response, threat management, and tools like Wireshark, SIEM, Linux, and SQL.
+      </div>
+      <div class="cert-skills">
+        Skills Acquired:
+        <ol>
+          <li>Cyber Threat Intelligence</li>
+          <li>Interviewing Skills</li>
+          <li>Cyber Attacks</li>
+          <li>Hardening</li>
+          <li>Cloud Security</li>
+          <li>Bash (Scripting Language)</li>
+          <li>Network Security</li>
+          <li>Threat Management</li>
+          <li>Vulnerability Management</li>
+          <li>Computer Security Incident Management</li>
+          <li>Cybersecurity</li>
+          <li>SQL</li>
+        </ol>
+      </div>
+      <a href="https://coursera.org/share/8652368f46239e959dd97bb84611722c" class="cert-link" target="_blank" rel="noopener noreferrer">
+        View Certificate
+      </a>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-title">CompTIA Security+ (Plus)</div>
+      <div class="cert-org">Issued by CompTIA</div>
+      <div class="cert-desc">
+        coming soon...
+      </div>
+      <div class="cert-skills">
+        Skills Acquired:
+        <ol>
+          coming soon...
+        </ol>
+      </div>
+      coming soon...
+    </div>
+  </section>
 
   <section id="about">
     <h2>About Me</h2>
